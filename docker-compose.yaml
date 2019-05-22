@@ -14,18 +14,22 @@ services:
     build: .
     volumes:
       - "./:/opt/app/"
-    entrypoint: "python3 nameko run --config config.yml main"
+    entrypoint: "nameko run --config config.yml main"
     depends_on:
       - rabbitmq
     links:
       - rabbitmq
 
+
+###
+## docker-compose exec nameko-client nameko shell --config config.yml
+###
   nameko-client:
     working_dir: "/opt/app"
     build: .
     volumes:
       - "./:/opt/app/"
-    entrypoint: "nameko shell --config config.yml"
+    entrypoint: "tail -f /dev/null"
     depends_on:
       - rabbitmq
     links:
