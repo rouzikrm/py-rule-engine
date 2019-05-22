@@ -1,0 +1,20 @@
+version: '3'
+services:
+  rabbitmq:
+   image: rabbitmq:3.6-management
+   environment:
+     - "RABBITMQ_DEFAULT_USER=guest"
+     - "RABBITMQ_DEFAULT_PASS=guest"
+   ports:
+     - "15673:15672"
+     - "5672:5672"
+  python3:
+    working_dir: "/opt/app"
+    image: python:3.6-stretch
+    volumes:
+      - "./:/opt/app/"
+    entrypoint: "tail -f /dev/null"
+    depends_on:
+      - rabbitmq
+    links:
+      - rabbitmq

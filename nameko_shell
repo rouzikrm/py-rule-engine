@@ -1,0 +1,9 @@
+import sys
+sys.path.append(".")
+from FactMessage  import FactMessage
+a = FactMessage({"age":19})
+import pickle
+import base64
+dumped = pickle.dumps(a)
+b64  = base64.b64encode(dumped).decode()
+n.rpc.ruleengine.validateRule(b64)
