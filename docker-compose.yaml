@@ -1,19 +1,31 @@
 version: '3'
 services:
   rabbitmq:
-   image: rabbitmq:3.6-management
-   environment:
-     - "RABBITMQ_DEFAULT_USER=guest"
-     - "RABBITMQ_DEFAULT_PASS=guest"
-   ports:
-     - "15673:15672"
-     - "5672:5672"
-  python3:
+    image: rabbitmq:3.6-management
+    environment:
+      - "RABBITMQ_DEFAULT_USER=guest"
+      - "RABBITMQ_DEFAULT_PASS=guest"
+    ports:
+      - "15673:15672"
+      - "5672:5672"
+
+  nameko-service:
     working_dir: "/opt/app"
-    image: python:3.6-stretch
+    build: .
     volumes:
       - "./:/opt/app/"
-    entrypoint: "tail -f /dev/null"
+    entrypoint: "python3 nameko run --config config.yml main"
+    depends_on:
+      - rabbitmq
+    links:
+      - rabbitmq
+
+  nameko-client:
+    working_dir: "/opt/app"
+    build: .
+    volumes:
+      - "./:/opt/app/"
+    entrypoint: "nameko shell --config config.yml"
     depends_on:
       - rabbitmq
     links:
