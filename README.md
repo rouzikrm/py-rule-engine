@@ -8,8 +8,10 @@ docker-compose exec nameko-client nameko shell --config config.yml
 ```
 `in nameko shell:`
 ```
-from example.FactMessage  import FactMessage
-a = FactMessage({"age":19})
+import sys
+sys.path.append(".")
+from example.AccountOpeningAgeFactMessage import AccountOpeningAgeFactMessage
+a = AccountOpeningAgeFactMessage({"age":19})
 import pickle
 import base64
 dumped = pickle.dumps(a)
