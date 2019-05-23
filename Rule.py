@@ -10,6 +10,7 @@ import importlib
 import inspect
 import yaml
 
+
 class Rule(object):
 
     def validate_rule(self, fact_message):
@@ -22,29 +23,42 @@ class Rule(object):
             except AttributeError:
                 return a()._next(None, fact_message.facts)
         else:
-            raise Exception(fact_message._validated_by +' condition returned false')
-
-
+            raise Exception(
+                fact_message._validated_by + ' condition returned false'
+            )
 
     def load_plugins(self, name):
         with open("config.yml", 'r') as ymlfile:
             cfg = yaml.load(ymlfile)
         pysearchre = re.compile(name + '.py$', re.IGNORECASE)
-        print(pysearchre)
         pluginfiles = filter(pysearchre.search,
-                             os.listdir(os.path.join(os.path.dirname(__file__),
-                                                     cfg['rule_engine']['rule_mod_base_dir'])))
+                             os.listdir(
+                                 os.path.join(os.path.dirname(__file__),
+                                              cfg['rule_engine']['rule_mod_base_dir']
+                                              )
+                             )
+                             )
         form_module = lambda fp: '.' + os.path.splitext(fp)[0]
         plugins = map(form_module, pluginfiles)
-        print(plugins)
         # import parent module / namespace
-        importlib.import_module(cfg['rule_engine']['rule_mod_base_dir'].split('/')[-1])
+        importlib.import_module(
+            cfg['rule_engine']['rule_mod_base_dir'].split('/')[-1]
+        )
         modules = []
         for plugin in plugins:
             print(plugin)
             modules.append(
-                importlib.import_module(plugin, package=cfg['rule_engine']['rule_mod_base_dir'].split('/')[-1]))
+                self.get_module_base_dir(cfg, plugin))
         for module in modules:
             for name, obj in inspect.getmembers(module, inspect.isclass):
                 print('name:', name, 'obj:', obj)
         return modules[0]
+
+    def get_module_base_dir(self, cfg, plugin):
+        return importlib.import_module(
+            plugin,
+            package=cfg['rule_engine']['rule_mod_base_dir']
+                .split('/')[-1])
+
+    def prepend_dot(self, fp):
+        return '.' + os.path.splitext(fp)[0]

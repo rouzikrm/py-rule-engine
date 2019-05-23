@@ -2,11 +2,13 @@ from RuleDecorator import rule
 from ActionDecorator import action
 from ConditionDecorator import condition
 from Rule import Rule
+
+
 @rule
 class AccountOpeningFamilyRule(Rule):
     @condition
-    def isHappy(self,facts):
-        if facts.get("happy")=="True":
+    def isHappy(self, facts):
+        if facts.get("happy") == "True":
             return True
         return False
 
