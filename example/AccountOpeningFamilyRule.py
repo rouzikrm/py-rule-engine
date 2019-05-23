@@ -1,18 +1,16 @@
 from RuleDecorator import rule
 from ActionDecorator import action
 from ConditionDecorator import condition
-from NextDecorator import  next
-from example.AccountOpeningFamilyFactMessage import  AccountOpeningFamilyFactMessage
 from Rule import Rule
 @rule
-class AccountOpeningAgeRule(Rule):
+class AccountOpeningFamilyRule(Rule):
     @condition
     def isHappy(self,facts):
-        if facts.get("age") > 18:
+        if facts.get("happy")=="True":
             return True
         return False
 
-    @next
+    @action
     def throwParty(self, facts):
         print("let's throw party")
-        return AccountOpeningFamilyFactMessage({"happy":"False"})
+        return "Happy Hoe!!"
