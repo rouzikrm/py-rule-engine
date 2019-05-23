@@ -17,7 +17,10 @@ class Rule(object):
         a = getattr(rule_reference, fact_message._validated_by)
         print(rule_reference)
         if (a()._condition(None, fact_message.facts)):
-            return a()._action(None, fact_message.facts)
+            try:
+                return a()._action(None, fact_message.facts)
+            except AttributeError:
+                return a()._next(None, fact_message.facts)
         else:
             raise Exception(fact_message._validated_by +' condition returned false')
 
