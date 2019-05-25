@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-from FactMessage import FactMessage
-from FactMessageDecorator import fact_message
+from types.FactMessage import FactMessage
+from decorators.FactMessageDecorator import fact_message
 
 
 @fact_message(validated_by="AccountOpeningAgeRule")

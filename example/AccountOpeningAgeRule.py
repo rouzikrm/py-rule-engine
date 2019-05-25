@@ -1,11 +1,11 @@
-from RuleDecorator import rule
+from decorators.RuleDecorator import rule
 
 
-from ConditionDecorator import condition
-from NextDecorator import next_rule
+from decorators.ConditionDecorator import condition
+from decorators.NextDecorator import next_rule
 from example.AccountOpeningCardIssueFactMessage \
     import AccountOpeningCardIssueFactMessage
-from Rule import Rule
+from types.Rule import Rule
 
 
 @rule

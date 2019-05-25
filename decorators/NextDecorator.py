@@ -1,4 +1,4 @@
-from Rule import Rule
+from types.Rule import Rule
 
 
 def next_rule(func):

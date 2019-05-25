@@ -1,7 +1,7 @@
-from RuleDecorator import rule
-from ActionDecorator import action
-from ConditionDecorator import condition
-from Rule import Rule
+from decorators.RuleDecorator import rule
+from decorators.ActionDecorator import action
+from decorators.ConditionDecorator import condition
+from types.Rule import Rule
 
 
 @rule
