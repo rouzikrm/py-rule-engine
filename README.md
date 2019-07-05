@@ -51,3 +51,5 @@ be aware when using @next_rule you should return an object of FactMessage type s
 
 Happy Rulling!
 ```
+
+### developed and maintained by Salar Moghadam (salarmgh) - Rouzbeh Karimi (rouzikrm) - Mahyar Abbaspour (mahyar.ap)
