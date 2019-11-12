@@ -5,7 +5,7 @@ from decorators.ConditionDecorator import condition
 from decorators.NextDecorator import next_rule
 from example.AccountOpeningCardIssueFactMessage \
     import AccountOpeningCardIssueFactMessage
-from types.Rule import Rule
+from rule_subtype.Rule import Rule
 
 
 @rule

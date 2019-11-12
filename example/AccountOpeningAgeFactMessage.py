@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from types.FactMessage import FactMessage
+from rule_subtype.FactMessage import FactMessage
 from decorators.FactMessageDecorator import fact_message
 
 
